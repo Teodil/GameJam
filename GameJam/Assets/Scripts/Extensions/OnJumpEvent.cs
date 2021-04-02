@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnJumpEvent : UnityEvent<Vector2>
+[System.Serializable]
+public class OnJumpEvent : UnityEvent<float>
 {
 
 }
