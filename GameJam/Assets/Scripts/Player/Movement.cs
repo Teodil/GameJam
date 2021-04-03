@@ -17,6 +17,9 @@ public class Movement : MonoBehaviour
     [SerializeField]
     private bool isClicked = false;
 
+    [SerializeField]
+    private AudioControl audioControl;
+
     [Header("Настройка скорости")]
     [SerializeField]
     private float speed = 5f;
@@ -38,6 +41,7 @@ public class Movement : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioControl = GetComponent<AudioControl>();
     }
 
     // Update is called once per frame
@@ -69,6 +73,9 @@ public class Movement : MonoBehaviour
             {
                 right = speed * Input.GetAxis("Horizontal");
                 rigidbody.velocity = new Vector2(right, rigidbody.velocity.y);
+                audioControl.PlaySoundAndNext();
+
+
             }
         }
         if ((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) && timerFoDoubleClick > maxTimeForDoubleClick)
