@@ -9,6 +9,11 @@ public class Movement : MonoBehaviour
     private Rigidbody2D rigidbody;
     private float right;
 
+    private Animator animator;
+    private SpriteRenderer spriteRenderer;
+    [SerializeField]
+    private bool IsRightMove = true;
+
     [SerializeField]
     private bool isClicked = false;
 
@@ -31,11 +36,16 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        SpriteFlipper();
+
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))//Обработка Нажатия на клавиши
         {
             if (!isClicked)//Проверка была ли нажата до этого клавиша
@@ -64,6 +74,23 @@ public class Movement : MonoBehaviour
         }
         if ((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) && timerFoDoubleClick > maxTimeForDoubleClick)
             isClicked = false;
+
+        animator.SetInteger("Velocity", (int)Input.GetAxis("Horizontal") * 100);
+    }
+
+
+    private void SpriteFlipper()
+    {
+        if (IsRightMove && Input.GetAxis("Horizontal")<0)
+        {
+            spriteRenderer.flipX = true;
+            IsRightMove = false;
+        }
+        if(!IsRightMove && Input.GetAxis("Horizontal") > 0)
+        {
+            spriteRenderer.flipX = false;
+            IsRightMove = true;
+        }
     }
 
     private void Strafe()
