@@ -62,6 +62,8 @@ public class Movement : MonoBehaviour
                 timerFoDoubleClick += Time.deltaTime;
             }
         }
+        if ((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) && timerFoDoubleClick > maxTimeForDoubleClick)
+            isClicked = false;
     }
 
     private void Strafe()

@@ -11,6 +11,8 @@ public class Jump : MonoBehaviour
     
     public OnJumpEvent jumpEvent;
 
+    private Rigidbody2D rigidbody;
+    
     [SerializeField]
     private float Force = 50f;
     [SerializeField]
@@ -22,23 +24,26 @@ public class Jump : MonoBehaviour
 
     void Start()
     {
-
+        rigidbody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space))
+        if (rigidbody.velocity.y == 0)
         {
-            timer += Time.deltaTime;
-            if (timer > maxTime)
-                timer = maxTime;
-        }
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            float jumpForce = timer * Force;
-            timer = 1;
-            jumpEvent.Invoke(jumpForce);
+            if (Input.GetKey(KeyCode.Space))
+            {
+                timer += Time.deltaTime;
+                if (timer > maxTime)
+                    timer = maxTime;
+            }
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                float jumpForce = timer * Force;
+                timer = 1;
+                rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
+            }
         }
     }
 }
