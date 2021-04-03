@@ -1,82 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Gayser : MonoBehaviour
 {
     // Start is called before the first frame update
+    [SerializeField]
+    private ParticleSystem particle;
 
     [SerializeField]
-    private Image ImageToShow;
-
+    private float reloadTime = 5f;
     [SerializeField]
-    private bool IsShown = false;
-
-    [Header("Настройка гейзера")]
-    [SerializeField]
-    private float ReloadTime = 5f;
-    [SerializeField]
-    private float TimeToShow = 1f;
-    [SerializeField]
-    private float TimeToHide = 1f;
-    [SerializeField]
-    private float ShowTime = 10f;
+    private float currentReloadTime = 1;
 
 
-    [Header("Текущее состояние")]
-    [SerializeField]
-    private float CurrentShowTime = 0;
-    [SerializeField]
-    private float currentReloadTime = 0;
-    [SerializeField]
-    private float currentShowHideTime = 0;
+    private bool isPlay = false;
 
     void Start()
     {
-        ImageToShow = GetComponentInChildren<Image>();
+        particle = GetComponentInChildren<ParticleSystem>();
+        particle.Play();
+    }
+
+
+    private void FixedUpdate()
+    {
+        if (currentReloadTime > 0)
+            currentReloadTime -= 0.02f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void FixedUpdate()
-    {
-        if (ReloadTime > 0)
+        if (currentReloadTime <= 0 && !isPlay)
         {
-            ReloadTime -= 0.1f;
-            return;
+            isPlay = true;
+            particle.Play();
         }
 
-        StartCoroutine(ShowHideCoroutine(true));
-
-
-    }
-
-   private IEnumerator ShowHideCoroutine(bool isShow)
-    {
-        if (isShow)
+        if (!particle.IsAlive() && currentReloadTime<=0)
         {
-            while (currentShowHideTime < TimeToShow)
-            {
-                currentShowHideTime += 0.1f;
-                yield return new WaitForSeconds(0.1f);
-            }
-            currentShowHideTime = 0;
-            IsShown = true;
-        }
-        else
-        {
-            while (currentShowHideTime < TimeToHide)
-            {
-                currentShowHideTime += 0.1f;
-                yield return new WaitForSeconds(0.1f);
-            }
-            currentShowHideTime = 0;
-            IsShown = false;
+            currentReloadTime = reloadTime;
+            isPlay = false;
         }
     }
 }
