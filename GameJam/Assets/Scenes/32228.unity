@@ -641,19 +641,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StepSoundSource: {fileID: 0}
   Sounds:
-  - {fileID: 8300000, guid: 6c28489d0d9c79e4cb2e7ada4fb8a7c1, type: 3}
-  - {fileID: 8300000, guid: 513ab146c0e384541a5d97b8c7475f7f, type: 3}
-  - {fileID: 8300000, guid: 9e50503d2a405b145a39cea20bbd9781, type: 3}
-  - {fileID: 8300000, guid: de13f985e729ee84391dd670eb57d78c, type: 3}
-  - {fileID: 8300000, guid: 2bb23c9042059c346988aa26f2a92d07, type: 3}
   - {fileID: 8300000, guid: e19aaccd451a516409adb4ef0ce4fb67, type: 3}
+  - {fileID: 8300000, guid: 6c28489d0d9c79e4cb2e7ada4fb8a7c1, type: 3}
   - {fileID: 8300000, guid: aaefc4aefc0ca4349b1377477f3b7890, type: 3}
   - {fileID: 8300000, guid: a66e8c4f854726b499ef64e07a690b97, type: 3}
   - {fileID: 8300000, guid: a5b5093f072e3174db2ca06eeb1ed6ea, type: 3}
-  - {fileID: 8300000, guid: f28dbd3185b78b04e8b93be8289d3b3c, type: 3}
+  - {fileID: 8300000, guid: 513ab146c0e384541a5d97b8c7475f7f, type: 3}
   currentSound: 0
   TimeForNextSound: 0
-  gapBetweenSounds: 0.2
+  gapBetweenSounds: 3.5
 --- !u!1 &215316192
 GameObject:
   m_ObjectHideFlags: 0
@@ -1854,7 +1850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  parallaxEffect: 0.3
+  parallaxEffect: 0.8
 --- !u!212 &907445831
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2246,7 +2242,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  parallaxEffect: 0.5
+  parallaxEffect: 0.8
 --- !u!212 &1214889290
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2764,7 +2760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
-  parallaxEffect: 0.7
+  parallaxEffect: 0.8
 --- !u!212 &1549594615
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -31,16 +31,23 @@ public class AudioControl : MonoBehaviour
             if (currentSound == Sounds.Count)
                 currentSound = 0;
             TimeForNextSound = gapBetweenSounds;
-            StartCoroutine(Timer());
+           // StartCoroutine(Timer());
         }
     }
 
+    void FixedUpdate() 
+    {
+        if (TimeForNextSound >= 0)
+        {
+            TimeForNextSound -= 0.1f;
+        }
+    }
     private IEnumerator Timer()
     {
         while (TimeForNextSound >= 0)
         {
-            TimeForNextSound -= Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            TimeForNextSound -= 0.1f;
+            yield return new WaitForFixedUpdate();
         }
     }
 
