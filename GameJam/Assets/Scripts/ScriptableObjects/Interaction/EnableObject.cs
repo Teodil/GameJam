@@ -8,6 +8,7 @@ public class EnableObject : InteractActions
 
     public override void ToDoAction(GameObject InteractTo, bool MakeOnce)
     {
+        Debug.Log("Дейсвтие свершилось");
         if (!MakeOnce)
         {
             if (InteractTo.active)
