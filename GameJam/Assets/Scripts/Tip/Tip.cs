@@ -8,7 +8,7 @@ public class Tip : MonoBehaviour
 {
     Canvas canvas;
     [SerializeField]
-    private List<Graphic> spriteRenderersToShow; 
+    private List<Graphic> GraphicToShow; 
     // Start is called before the first frame update
     void Start()
     {
@@ -43,15 +43,15 @@ public class Tip : MonoBehaviour
     private IEnumerator ShowSprite()
     {
         Debug.Log("Начало куратины показать");
-        while(spriteRenderersToShow[1].color.a < 1)
+        while(GraphicToShow[0].color.a < 1)
         {
-            for (int i = 0; i < spriteRenderersToShow.Count; i++)
+            foreach (Graphic graphic in GraphicToShow)
             {
-                Debug.Log("Появляется");
-                spriteRenderersToShow[i].color = new Color(spriteRenderersToShow[i].color.r, spriteRenderersToShow[i].color.g, spriteRenderersToShow[i].color.b, spriteRenderersToShow[i].color.a + 1 * Time.deltaTime);
-                yield return new WaitForFixedUpdate();
+                Debug.Log("Исчезает");
+                graphic.color = new Color(graphic.color.r, graphic.color.g, graphic.color.b, graphic.color.a + 1 * Time.deltaTime);
             }
             yield return new WaitForEndOfFrame();
+
         }
         Debug.Log("Конец куратины показать");
     }
@@ -59,14 +59,14 @@ public class Tip : MonoBehaviour
     private IEnumerator HideSprite()
     {
         Debug.Log("Начало куратины спрятать");
-        while (spriteRenderersToShow[1].color.a > 0)
+        while (GraphicToShow[0].color.a > 0)
         {
-            for (int i=0;i<spriteRenderersToShow.Count;i++)
+            foreach (Graphic graphic in GraphicToShow)
             {
                 Debug.Log("Исчезает");
-                spriteRenderersToShow[i].color = new Color(spriteRenderersToShow[i].color.r, spriteRenderersToShow[i].color.g, spriteRenderersToShow[i].color.b, spriteRenderersToShow[i].color.a - 1 * Time.deltaTime);
-                yield return new WaitForEndOfFrame();
+                graphic.color = new Color(graphic.color.r, graphic.color.g, graphic.color.b, graphic.color.a - 1 * Time.deltaTime);
             }
+            yield return new WaitForEndOfFrame();
         }
         Debug.Log("Конец куратины спрятать");
     }
