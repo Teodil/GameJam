@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "EnableObject", menuName = "Interaction", order = 51)]
+[CreateAssetMenu(fileName = "EnableObject", menuName = "EnableObject", order = 51)]
 public class EnableObject : InteractActions
 {
 

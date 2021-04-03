@@ -12,6 +12,7 @@ public class Jump : MonoBehaviour
     public OnJumpEvent jumpEvent;
 
     private Rigidbody2D rigidbody;
+    private Animator animator;
     
     [SerializeField]
     private float Force = 50f;
@@ -25,6 +26,7 @@ public class Jump : MonoBehaviour
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -32,6 +34,7 @@ public class Jump : MonoBehaviour
     {
         if (rigidbody.velocity.y == 0)
         {
+            animator.SetBool("IsFalling", false);
             if (Input.GetKey(KeyCode.Space))
             {
                 timer += Time.deltaTime;
@@ -43,7 +46,12 @@ public class Jump : MonoBehaviour
                 float jumpForce = timer * Force;
                 timer = 1;
                 rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
+                animator.SetTrigger("Jump");
             }
+        }
+        if(rigidbody.velocity.y<0)
+        {
+            animator.SetBool("IsFalling", true);
         }
     }
 }

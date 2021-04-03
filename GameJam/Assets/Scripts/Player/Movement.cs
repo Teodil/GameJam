@@ -69,12 +69,12 @@ public class Movement : MonoBehaviour
             {
                 right = speed * Input.GetAxis("Horizontal");
                 rigidbody.velocity = new Vector2(right, rigidbody.velocity.y);
-                timerFoDoubleClick += Time.deltaTime;
             }
         }
         if ((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) && timerFoDoubleClick > maxTimeForDoubleClick)
             isClicked = false;
 
+        timerFoDoubleClick += Time.deltaTime;
         animator.SetInteger("Velocity", (int)Input.GetAxis("Horizontal") * 100);
     }
 
