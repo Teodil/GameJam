@@ -5,19 +5,21 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "EnableObject", menuName = "Interaction", order = 51)]
 public class EnableObject : InteractActions
 {
-    [SerializeField]
-    private GameObject toEnable;
 
-    public override void ToDoAction()
+    public override void ToDoAction(GameObject InteractTo, bool MakeOnce)
     {
-        if (toEnable.active)
+        if (!MakeOnce)
         {
-            toEnable.SetActive(false);
+            if (InteractTo.active)
+            {
+                InteractTo.SetActive(false);
+            }
+            else
+            {
+                InteractTo.SetActive(true);
+            }
         }
-        else
-        {
-            toEnable.SetActive(true);
-        }
+        _MakeOnce = MakeOnce; 
     }
 
 }

@@ -5,28 +5,21 @@ using UnityEngine;
 public class InteractArea : MonoBehaviour
 {
     [SerializeField]
-    private ScriptableObject ActionToDo;
-    private Interaction playerInteract;
+    private InteractActions ActionToDo;
+    [SerializeField]
+    private GameObject InteractTo;
+    [SerializeField]
+    private bool MakeOnce = false;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if(collision.tag == "Player")
+        Debug.Log("Стоит в зоне действия");
+        if (collision.tag == "Player")
         {
-            playerInteract = collision.GetComponent<Interaction>();
-            playerInteract.Interact += ToDo;
+            if (Input.GetKeyDown(KeyCode.E))
+                ActionToDo.ToDoAction(InteractTo,MakeOnce);
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if(collision.tag == "Player")
-        {
-            playerInteract.Interact -= ToDo;
-        }
-    }
-
-    private void ToDo()
-    {
-        Debug.Log("Взмаимодествие");
     }
 }

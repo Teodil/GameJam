@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class InteractActions : ScriptableObject
 {
-    public virtual void ToDoAction()
+
+    internal bool _MakeOnce = false;
+
+    public virtual void ToDoAction(GameObject gameObject, bool MakeOnce)
     {
         Debug.Log("Интерация");
     }
