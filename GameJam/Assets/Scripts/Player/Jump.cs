@@ -51,7 +51,7 @@ public class Jump : MonoBehaviour
                 IsJumping = true;
             }
         }
-        if(rigidbody.velocity.y<0)
+        if (rigidbody.velocity.y < 0)
         {
             IsJumping = true;
             animator.SetBool("IsFalling", true);
