@@ -10,6 +10,9 @@ public class AudioControl : MonoBehaviour
     private List<AudioClip> Sounds;
 
     [SerializeField]
+    private Jump playerJump;
+
+    [SerializeField]
     private int currentSound = 0;
 
     [SerializeField]
@@ -20,11 +23,12 @@ public class AudioControl : MonoBehaviour
     void Start()
     {
         StepSoundSource = GetComponent<AudioSource>();
+        playerJump = GetComponent<Jump>();
     }
 
     public void PlaySoundAndNext()
     {
-        if (TimeForNextSound <= 0)
+        if (TimeForNextSound <= 0 && !playerJump.IsJumping)
         {
             StepSoundSource.PlayOneShot(Sounds[currentSound]);
             currentSound++;
@@ -40,14 +44,6 @@ public class AudioControl : MonoBehaviour
         if (TimeForNextSound >= 0)
         {
             TimeForNextSound -= 0.1f;
-        }
-    }
-    private IEnumerator Timer()
-    {
-        while (TimeForNextSound >= 0)
-        {
-            TimeForNextSound -= 0.1f;
-            yield return new WaitForFixedUpdate();
         }
     }
 

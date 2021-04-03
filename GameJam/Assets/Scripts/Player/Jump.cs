@@ -8,9 +8,6 @@ public class Jump : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    
-    public OnJumpEvent jumpEvent;
-
     private Rigidbody2D rigidbody;
     private Animator animator;
     
@@ -21,10 +18,13 @@ public class Jump : MonoBehaviour
     [SerializeField]
     private float maxTime = 2f;
 
+    public bool IsJumping { get; private set; }
+
 
 
     void Start()
     {
+        IsJumping = false;
         rigidbody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -34,6 +34,7 @@ public class Jump : MonoBehaviour
     {
         if (rigidbody.velocity.y == 0)
         {
+            IsJumping = false;
             animator.SetBool("IsFalling", false);
             if (Input.GetKey(KeyCode.Space))
             {
@@ -47,11 +48,14 @@ public class Jump : MonoBehaviour
                 timer = 1;
                 rigidbody.velocity = new Vector2(rigidbody.velocity.x, jumpForce);
                 animator.SetTrigger("Jump");
+                IsJumping = true;
             }
         }
         if(rigidbody.velocity.y<0)
         {
+            IsJumping = true;
             animator.SetBool("IsFalling", true);
         }
+
     }
 }
