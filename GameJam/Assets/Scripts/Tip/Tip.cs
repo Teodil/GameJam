@@ -7,8 +7,11 @@ public class Tip : MonoBehaviour
 
 {
     Canvas canvas;
+
     [SerializeField]
-    private List<Graphic> GraphicToShow; 
+    private float albedoDelta = 1f;
+    [SerializeField]
+    private List<Graphic> GraphicToShow;
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +51,7 @@ public class Tip : MonoBehaviour
             foreach (Graphic graphic in GraphicToShow)
             {
                 Debug.Log("Исчезает");
-                graphic.color = new Color(graphic.color.r, graphic.color.g, graphic.color.b, graphic.color.a + 1 * Time.deltaTime);
+                graphic.color = new Color(graphic.color.r, graphic.color.g, graphic.color.b, graphic.color.a + albedoDelta * Time.deltaTime);
             }
             yield return new WaitForEndOfFrame();
 
@@ -64,7 +67,7 @@ public class Tip : MonoBehaviour
             foreach (Graphic graphic in GraphicToShow)
             {
                 Debug.Log("Исчезает");
-                graphic.color = new Color(graphic.color.r, graphic.color.g, graphic.color.b, graphic.color.a - 1 * Time.deltaTime);
+                graphic.color = new Color(graphic.color.r, graphic.color.g, graphic.color.b, graphic.color.a - albedoDelta * Time.deltaTime);
             }
             yield return new WaitForEndOfFrame();
         }

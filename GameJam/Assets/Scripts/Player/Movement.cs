@@ -50,6 +50,12 @@ public class Movement : MonoBehaviour
 
         SpriteFlipper();
 
+
+        if (currentReloadStrafeTime > reloadStrafeTime - 0.1f)
+        {
+            rigidbody.velocity = new Vector2(rigidbody.velocity.x, -0.001f);
+        }
+
         if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))//Обработка Нажатия на клавиши
         {
             if (!isClicked)//Проверка была ли нажата до этого клавиша
@@ -69,13 +75,15 @@ public class Movement : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
         {
-            if (currentReloadStrafeTime < reloadStrafeTime-0.2f)
+            if (currentReloadStrafeTime < reloadStrafeTime-0.1f)
             {
                 right = speed * Input.GetAxis("Horizontal");
                 rigidbody.velocity = new Vector2(right, rigidbody.velocity.y);
                 audioControl.PlaySoundAndNext();
-
-
+            }
+            else
+            {
+                rigidbody.velocity = new Vector2(rigidbody.velocity.x, -0.001f);
             }
         }
         if ((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) && timerFoDoubleClick > maxTimeForDoubleClick)
