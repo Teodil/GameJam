@@ -35,9 +35,6 @@ public class Movement : MonoBehaviour
     private float reloadStrafeTime = 5f;
     [SerializeField]
     private float currentReloadStrafeTime = 0;
-    [SerializeField]
-    private Animator strafeAnim;
-    
 
     void Start()
     {
@@ -113,11 +110,6 @@ public class Movement : MonoBehaviour
 
     private void Strafe()
     {
-        if (Input.GetAxis("Horizontal")>0)
-            strafeAnim.SetTrigger("ToRight");
-        else
-            strafeAnim.SetTrigger("ToLeft");
-
         rigidbody.velocity = new Vector2(0, rigidbody.velocity.y);
         float accelerate = strafeForce * MathExten.GetSign(Input.GetAxis("Horizontal"));
         Debug.Log("Ускорение " + accelerate);
