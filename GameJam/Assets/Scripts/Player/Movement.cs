@@ -35,6 +35,7 @@ public class Movement : MonoBehaviour
     private float reloadStrafeTime = 5f;
     [SerializeField]
     private float currentReloadStrafeTime = 0;
+    public Animator strafAnim;
 
     void Start()
     {
@@ -56,21 +57,10 @@ public class Movement : MonoBehaviour
             rigidbody.velocity = new Vector2(rigidbody.velocity.x, -0.001f);
         }
 
-        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))//Обработка Нажатия на клавиши
+        if (Input.GetKeyDown(KeyCode.LeftShift))//Обработка Нажатия на клавиши
         {
-            if (!isClicked)//Проверка была ли нажата до этого клавиша
-            {
-                Debug.Log("Обновление таймера");
-                timerFoDoubleClick = 0;
-                isClicked = true;
-            }
-            else
-            {
-                if (timerFoDoubleClick < maxTimeForDoubleClick && currentReloadStrafeTime <= 0)
-                    Strafe();
-                else
-                    isClicked = false;
-            }
+            if (currentReloadStrafeTime <= 0)
+                Strafe();
 
         }
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
