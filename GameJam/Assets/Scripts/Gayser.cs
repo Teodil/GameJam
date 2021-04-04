@@ -44,4 +44,14 @@ public class Gayser : MonoBehaviour
             isPlay = false;
         }
     }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (particle.IsAlive() && collision.tag=="Player")
+        {
+            Dead dead = collision.gameObject.GetComponent<Dead>();
+            dead.PlayerDead();
+        }   
+    }
+
 }

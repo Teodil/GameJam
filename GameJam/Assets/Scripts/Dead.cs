@@ -29,6 +29,8 @@ public class Dead : MonoBehaviour
 
     public void ShowDeadScreen()
     {
+        movement.enabled = false;
+        jump.enabled = false;
         DeadScreen.SetActive(true);
     }
 
