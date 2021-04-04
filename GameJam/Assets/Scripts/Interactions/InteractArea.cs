@@ -18,6 +18,15 @@ public class InteractArea : MonoBehaviour
     private float albedoDelta = 1f;
 
 
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            StartCoroutine(ShowSprite());
+        }
+    }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log("Стоит в зоне действия");
@@ -25,8 +34,7 @@ public class InteractArea : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                if (GraphicToShow.Count > 0)
-                    StartCoroutine(ShowSprite());
+                Debug.Log("Старт");
                 ActionToDo.ToDoAction(InteractTo, MakeOnce);
 
             }
@@ -36,10 +44,9 @@ public class InteractArea : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("Стоит в зоне действия");
         if (collision.tag == "Player")
         {
-            HideSprite();
+            StartCoroutine(HideSprite());
         }
     }
 
