@@ -6,48 +6,36 @@ public class Gayser : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-    private ParticleSystem particle;
+    private float reloadBublesTime = 5f;
+    [SerializeField]
+    private float currentReloadBublesTime = 5f;
 
     [SerializeField]
-    private float reloadTime = 5f;
-    [SerializeField]
-    private float currentReloadTime = 1;
+    private Animator animator;
 
-
-    private bool isPlay = false;
-
+    // Start is called before the first frame update
     void Start()
     {
-        particle = GetComponentInChildren<ParticleSystem>();
-        particle.Play();
-    }
-
-
-    private void FixedUpdate()
-    {
-        if (currentReloadTime > 0)
-            currentReloadTime -= 0.02f;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentReloadTime <= 0 && !isPlay)
+        if (currentReloadBublesTime > 0)
         {
-            isPlay = true;
-            particle.Play();
+            currentReloadBublesTime -= 1 * Time.deltaTime;
         }
-
-        if (!particle.IsAlive() && currentReloadTime<=0)
+        else
         {
-            currentReloadTime = reloadTime;
-            isPlay = false;
+            animator.SetTrigger("Start");
+            currentReloadBublesTime = reloadBublesTime;
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+private void OnTriggerStay2D(Collider2D collision)
     {
-        if (particle.IsAlive() && collision.tag=="Player")
+        if (animator.GetCurrentAnimatorStateInfo(0).IsName("steam") && collision.tag=="Player")
         {
             Dead dead = collision.gameObject.GetComponent<Dead>();
             dead.PlayerDead();
