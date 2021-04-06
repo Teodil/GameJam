@@ -6,7 +6,7 @@ public class ShipVanish : MonoBehaviour
 {
     // Start is called before the first frame update
     [SerializeField]
-    private float albedoDelta = 1f;
+    private float albedoDelta = 0.2f;
     [SerializeField]
     private List<SpriteRenderer> GraphicToShow;
     // Start is called before the first frame update
