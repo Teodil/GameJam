@@ -17,12 +17,15 @@ public class InteractArea : MonoBehaviour
     [SerializeField]
     private float albedoDelta = 1f;
 
+    private bool isIn = false;
+
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Player")
         {
+            isIn = true;
             StartCoroutine(ShowSprite());
         }
     }
@@ -30,7 +33,7 @@ public class InteractArea : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         Debug.Log("Стоит в зоне действия");
-        if (collision.tag == "Player")
+        if (isIn)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
@@ -46,6 +49,7 @@ public class InteractArea : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            isIn = false;
             StartCoroutine(HideSprite());
         }
     }

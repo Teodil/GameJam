@@ -56,6 +56,8 @@ public class Jump : MonoBehaviour
             IsJumping = true;
             animator.SetBool("IsFalling", true);
         }
+        else
+            animator.SetBool("IsFalling", false);
 
     }
 }
