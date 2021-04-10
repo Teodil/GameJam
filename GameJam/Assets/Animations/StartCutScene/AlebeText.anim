@@ -1288,9 +1288,9 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 23.533333
-    functionName: 
-    data: 
+  - time: 22.616667
+    functionName: LoadScene
+    data: 32228
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
